@@ -40,7 +40,7 @@ io.on("connection", function(socket){
 		//console.log(PLAYER_LIST);
 	});
 
-	socket.emit("setSocketInformation", {id:socket.id, ip:socket.request.connection.remoteAddress, inlobby:false, serveraddress:__ConnectTo__});
+	socket.emit("setSocketInformation", {id:socket.id, ip:socket.request.connection.remoteAddress, inlobby:false, serveraddress:"awfullysaltysquid.herokuapp.com"});
 
 	socket.on("setPlayerInformation", function(data){
 		PLAYER_LIST[socket.id] = data;
