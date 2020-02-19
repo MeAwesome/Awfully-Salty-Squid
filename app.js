@@ -1,17 +1,14 @@
 var express = require("express");
-var os = require("os");
 var app = express();
 var serv = require("http").Server(app);
-var port = 52470;
+var port = process.env.PORT;
 
 app.get("/", function(req, res){
 	res.sendFile(__dirname + "/client/index.html");
 });
 app.use("/client", express.static(__dirname + "/client"));
 
-var __ConnectTo__ = os.networkInterfaces()["Wi-Fi"][1].address + ":" + port;
-
-serv.listen(port);
+serv.listen(port || 2000);
 console.log("--> Server started on } " + __ConnectTo__);
 
 var SOCKET_LIST = {}, PLAYER_LIST = {}, HOST = null;
@@ -24,7 +21,7 @@ io.on("connection", function(socket){
 	SOCKET_LIST[socket.id] = socket;
 
 	console.log("**A NEW CONNECTION WAS ESTABLISHED**\n		-->" + socket.request.connection.remoteAddress);
-	
+
 	socket.on("disconnect", function(){
 		if(socket.id in PLAYER_LIST){
 			if((PLAYER_LIST[socket.id].inlobby == true || PLAYER_LIST[socket.id].ingame == true) && HOST != null){
@@ -42,41 +39,41 @@ io.on("connection", function(socket){
 		delete SOCKET_LIST[socket.id];
 		//console.log(PLAYER_LIST);
 	});
-	
+
 	socket.emit("setSocketInformation", {id:socket.id, ip:socket.request.connection.remoteAddress, inlobby:false, serveraddress:__ConnectTo__});
 
 	socket.on("setPlayerInformation", function(data){
 		PLAYER_LIST[socket.id] = data;
 		//console.log(PLAYER_LIST);
 	});
-	
+
 	socket.on("setHostInformation", function(data){
 		HOST = data;
 		//console.log(HOST);
 	});
-	
+
 	socket.on("sendToHost", function(name, data){
 		if(HOST != null){
 			SOCKET_LIST[HOST.id].emit(name, data);
 		}
 	});
-	
+
 	socket.on("sendToClient", function(client, name, data){
 		SOCKET_LIST[client].emit(name, data);
 	});
-	
+
 	socket.on("sendToClients", function(name, data){
 		for(person in PLAYER_LIST){
 			SOCKET_LIST[person].emit(name, data);
 		}
 	});
-	
+
 	socket.on("retreiveHostInfo", function(name, data){
 		if(HOST != null){
 			SOCKET_LIST[HOST.id].emit("resendInformation", name, data);
 		}
 	});
-	
+
 	socket.on("retreivePlayerInfo", function(){
 		for(person in PLAYER_LIST){
 			if(PLAYER_LIST[person].inlobby && HOST != null){
@@ -84,7 +81,7 @@ io.on("connection", function(socket){
 			}
 		}
 	});
-	
+
 	socket.on("toSelectGameMode", function(){
 		SOCKET_LIST[HOST.id].emit("selectGameMode");
 		for(person in PLAYER_LIST){
@@ -93,12 +90,12 @@ io.on("connection", function(socket){
 			}
 		}
 	});
-	
+
 	socket.on("startGame", function(){
 		for(person in SOCKET_LIST){
 			SOCKET_LIST[person].emit("beginGame");
 		}
 	});
-	
+
 	}
 });
