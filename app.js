@@ -9,7 +9,7 @@ app.get("/", function(req, res){
 app.use("/client", express.static(__dirname + "/client"));
 
 serv.listen(port || 2000);
-console.log("--> Server started on } " + __ConnectTo__);
+console.log("--> Server started on - " + __ConnectTo__);
 
 var SOCKET_LIST = {}, PLAYER_LIST = {}, HOST = null;
 
