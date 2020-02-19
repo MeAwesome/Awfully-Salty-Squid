@@ -24,7 +24,7 @@ var Files = {
 }
 
 Files.loadFile = function(key, src){
-	fetch('http://' + host.attributes.serveraddress + src)
+	fetch('https://' + host.attributes.serveraddress + src)
 		.then(response => response.text())
 		.then((data) => {
 		Files.texts[key] = data;
@@ -54,7 +54,7 @@ Keyboard._keys = {};
 Keyboard.init = function(keys){
     window.addEventListener('keydown', this._onKeyDown.bind(this));
     window.addEventListener('keyup', this._onKeyUp.bind(this));
-	
+
     keys.forEach(function (key) {
         this._keys[key] = false;
     }.bind(this));
