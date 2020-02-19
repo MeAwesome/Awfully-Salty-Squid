@@ -1,0 +1,31 @@
+html{box-sizing:border-box;}
+*, *:before, *:after{box-sizing:inherit;}
+*{margin:0;padding:0;border:0;}
+
+html {
+	background-color:#0000FF;
+	cursor:none;
+	overflow: hidden;
+	height:100%;
+	position:relative;
+}
+
+canvas{
+	color:#FFFFFF;
+	height:100%;
+	width:100%;
+	margin:0;
+	border: 0;
+    overflow: hidden;
+    display: block;
+}
+
+input{
+	display:none;
+	font-size:42px;
+	text-align:center;
+	position:absolute;
+	-webkit-appearance: none;
+	border-radius: 0;
+	width:100%;
+}

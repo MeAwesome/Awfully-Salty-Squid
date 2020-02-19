@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Awfully Salty Squid</title>
+		<link href="https://fonts.googleapis.com/css?family=Pattaya" rel="stylesheet">
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+		<script id="objects" src="/client/js/objects.js"></script>
+		<link rel="stylesheet" type="text/css" href="/client/main.css">
+		<link rel="shortcut icon" href="/client/assets/squid.ico"/>
+		<meta name="theme-color" content="#0000FF">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="viewport" content= "width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	</head>
+
+<audio id="sound" autoplay loop src="/client/Main_Theme.mp3" volume="1.0"></audio>
+<audio id="waiting" loop src="/client/Waiting_Theme.wav" volume="1.0"></audio>
+<audio id="voting" loop src="/client/Voting_Theme.wav" volume="1.0"></audio>
+<audio id="victory" loop src="/client/Victory_Theme.wav" volume="0.5"></audio>
+<input type="text", id="textinput" autocomplete="off" autofocus>
+<canvas id="screen">AN ISSUE HAS OCCURED</canvas>
+<script id="source"></script>
+<script>
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+	document.getElementById("source").src = "/client/js/player.js";
+} else {
+	document.getElementById("source").src = "/client/js/main.js";
+}
+</script>
+
+</html>
