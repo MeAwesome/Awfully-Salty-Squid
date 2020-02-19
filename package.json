@@ -1,5 +1,5 @@
 {
-  "name":"Awfully Salty Squid",
+  "name":"awfully-salty-squid",
   "version":"1.0.0",
   "main":"app.js",
   "dependencies": {
