@@ -9,7 +9,7 @@ app.get("/", function(req, res){
 app.use("/client", express.static(__dirname + "/client"));
 
 serv.listen(port || 2000);
-console.log("--> Server started on - " + __ConnectTo__);
+//console.log("--> Server started on - " + __ConnectTo__);
 
 var SOCKET_LIST = {}, PLAYER_LIST = {}, HOST = null;
 
@@ -20,16 +20,16 @@ io.on("connection", function(socket){
 	socket.id = Math.random();
 	SOCKET_LIST[socket.id] = socket;
 
-	console.log("**A NEW CONNECTION WAS ESTABLISHED**\n		-->" + socket.request.connection.remoteAddress);
+	//console.log("**A NEW CONNECTION WAS ESTABLISHED**\n		-->" + socket.request.connection.remoteAddress);
 
 	socket.on("disconnect", function(){
 		if(socket.id in PLAYER_LIST){
 			if((PLAYER_LIST[socket.id].inlobby == true || PLAYER_LIST[socket.id].ingame == true) && HOST != null){
 				SOCKET_LIST[HOST.id].emit("lostPlayerConnection", PLAYER_LIST[socket.id]);
 			}
-			console.log("**" + PLAYER_LIST[socket.id].name + " Disconnected From The Server**\n		-->" + PLAYER_LIST[socket.id].ip);
+			//console.log("**" + PLAYER_LIST[socket.id].name + " Disconnected From The Server**\n		-->" + PLAYER_LIST[socket.id].ip);
 		} else if (HOST != null && socket.id == HOST.id){
-			console.log("**HOST Disconnected From the Server**\n		-->" + HOST.ip);
+			//console.log("**HOST Disconnected From the Server**\n		-->" + HOST.ip);
 			HOST = null;
 			for(person in PLAYER_LIST){
 				SOCKET_LIST[person].emit("hostQuit");
