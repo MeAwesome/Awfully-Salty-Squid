@@ -1,6 +1,7 @@
 var express = require("express");
 var app = express();
 var serv = require("http").Server(app);
+var io = require("socket.io")(serv,{});
 var port = process.env.PORT;
 
 app.get("/", function(req, res){
@@ -8,12 +9,10 @@ app.get("/", function(req, res){
 });
 app.use("/client", express.static(__dirname + "/client"));
 
-serv.listen(port || 2000);
-//console.log("--> Server started on - " + __ConnectTo__);
+serv.listen(port || 3000);
 
 var SOCKET_LIST = {}, PLAYER_LIST = {}, HOST = null;
 
-var io = require("socket.io")(serv,{});
 io.on("connection", function(socket){
 	if(Object.keys(SOCKET_LIST).length < 9){
 
