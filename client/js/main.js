@@ -23,7 +23,7 @@ function initialStart(){
 		elem.mozRequestFullScreen();
 	} else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
 		elem.webkitRequestFullscreen();
-	} else if (elem.msRequestFullscreen) { /* IE/Edge */	
+	} else if (elem.msRequestFullscreen) { /* IE/Edge */
 		elem.msRequestFullscreen();
 	}
 	setTimeout(function(){
@@ -42,6 +42,7 @@ function titleScreen(){
 	Canvas.image(Loader.getImage("blueSquid"), "center", "center");
 	Canvas.text("Press Space", "center", Canvas.height - 100, "white", 40, "title");
 	Keyboard.setFunction("initialStart", Keyboard.SPACE);
+	document.getElementById("sound").play();
 }
 
 function homeScreen(){
@@ -197,7 +198,7 @@ function showVotingAnswers(num){
 			pack.push(host.attributes.players[id].answer[host.attributes.players[id].question.indexOf(host.attributes.roundpackage[0][num])]);
 			people.push(id);
 			break;
-		}	
+		}
 	}
 	socket.emit("sendToClients", "votingAnswers", {one:pack[0],two:pack[1]});
 	host.attributes.timeleft = 15;
